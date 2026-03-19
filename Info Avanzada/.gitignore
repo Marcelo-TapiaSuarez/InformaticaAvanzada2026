@@ -1,0 +1,13 @@
+# Ignorar todos los archivos compilados de Java
+*.class
+
+# Ignorar carpetas de salida de compiladores e IDEs
+bin/
+out/
+target/
+build/
+
+# Archivos de configuración de editores (opcional)
+.idea/
+.vscode/
+*.iml

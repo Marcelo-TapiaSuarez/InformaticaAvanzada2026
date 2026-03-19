@@ -11,3 +11,6 @@ build/
 .idea/
 .vscode/
 *.iml
+
+# Ignorar archivos de contexto de BlueJ
+*.ctxt

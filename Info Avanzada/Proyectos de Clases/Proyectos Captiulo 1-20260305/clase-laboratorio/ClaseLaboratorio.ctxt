@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=ClaseLaboratorio
+comment0.text=\r\n\ La\ ClaseLaboratorio\ es\ una\ clase\ que\ representa\ la\ planilla\ de\ inscriptos\ para\r\n\ una\ clase\ de\ laboratorio.\ Almacen\ la\ hora\ de\ clases,\ aula\ y\ lista\ de\ estudiantes,\r\n\ como\ tambi\u00E9n\ el\ nombre\ del\ profesor.\r\n\ \r\n\ @author\ Michael\ K\u00F6lling\ and\ David\ Barnes\r\n\ @version\ 2016.02.29\r\n\ @translation\ Maximiliano\ Andr\u00E9s\ Eschoyez\ y\ Mart\u00EDn\ Federico\ Pelliza\ (2025)\r\n
+comment1.params=cantidadMaximaEstudiantes
+comment1.target=ClaseLaboratorio(int)
+comment1.text=\r\n\ Crea\ una\ ClaseLaboratorio\ con\ cupo\ de\ estudiantes.\ El\ resto\ de\ los\ detalles\r\n\ se\ configuran\ con\ los\ valores\ por\ defecto.\r\n
+comment2.params=newEstudiante
+comment2.target=void\ anotarEstudiante(Estudiante)
+comment2.text=\r\n\ Agrega\ un\ estudiante\ a\ ClaseLaboratorio.\r\n
+comment3.params=
+comment3.target=java.lang.Integer\ numeroDeEstudiantes()
+comment3.text=\r\n\ Devuelve\ el\ n\u00FAmero\ de\ estudiantes\ inscriptos\ en\ esta\ ClaseLaboratorio.\r\n
+comment4.params=numeroAula
+comment4.target=void\ setAula(java.lang.String)
+comment4.text=\r\n\ Setea\ el\ n\u00FAmero\ de\ aula\ de\ esta\ ClaseLaboratorio.\r\n
+comment5.params=stringDiaHora
+comment5.target=void\ setHora(java.lang.String)
+comment5.text=\r\n\ Setea\ la\ hora\ para\ esta\ ClaseLaboratorio.\ El\ par\u00E1metro\ debe\r\n\ definir\ el\ d\u00EDa\ y\ la\ hora\ del\ d\u00EDa,\ por\ ejemplo\ "Viernes,\ 15\:00"..\r\n
+comment6.params=nombreInstructor
+comment6.target=void\ setInstructor(java.lang.String)
+comment6.text=\r\n\ Setea\ el\ nombre\ del\ instructor\ de\ esta\ ClaseLaboratorio.\r\n
+comment7.params=
+comment7.target=void\ printLista()
+comment7.text=\r\n\ Imprime\ en\ la\ terminal\ de\ salida\ los\ detalles\ y\ la\ lista\ de\r\n\ inscriptos\ de\ esta\ ClaseLaboratorio.\r\n
+numComments=8

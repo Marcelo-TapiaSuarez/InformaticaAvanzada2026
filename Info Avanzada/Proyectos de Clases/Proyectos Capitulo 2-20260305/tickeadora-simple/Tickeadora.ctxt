@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Tickeadora
+comment0.text=\r\n\ Tickeadora\ modela\ una\ m\u00E1quina\ que\ entrega\ tickets\ de\ tarifa\ \u00FAnica.\r\n\ \r\n\ El\ valor\ del\ ticket\ se\ especifica\ en\ el\ constructor.\r\n\ Esta\ es\ una\ m\u00E1quina\ simple\ en\ el\ sentido\ que\ conf\u00EDa\ en\ que\r\n\ los\ usuarioas\ van\ a\ ingresar\ la\ cantidad\ suficiente\ de\ dinero\r\n\ antes\ de\ imprimir\ un\ ticket.\ Tambi\u00E9n\ asume\ que\ los\ usuarios\r\n\ ingresan\ valor\ correcto.\r\n\r\n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2016.02.29\r\n\ @translation\ Maximiliano\ Andr\u00E9s\ Eschoyez\ y\ Mart\u00EDn\ Federico\ Pelliza\ (2025)\r\n
+comment1.params=costo
+comment1.target=Tickeadora(java.lang.Integer)
+comment1.text=\r\n\ Crea\ una\ nueva\ m\u00E1quina\ que\ entrega\ tickets\ por\ el\ precio\ indicado.\r\n\ Note\ que\ el\ precio\ debe\ ser\ mayor\ que\ cero\ y\ que\ no\ existe\ control\r\n\ para\ garatizar\ que\ se\ cumpla.\r\n
+comment2.params=c
+comment2.target=java.lang.Integer\ control(java.lang.Integer)
+comment3.params=
+comment3.target=java.lang.Integer\ getPrecio()
+comment3.text=\r\n\ Devuelve\ el\ precio\ de\ un\ ticket.\r\n
+comment4.params=
+comment4.target=java.lang.Integer\ getBalance()
+comment4.text=\r\n\ Devuelve\ la\ cantidad\ de\ dinero\ ingresada\ al\ momento\ por\ un\ cliente\r\n\ para\ el\ pr\u00F3ximo\ ticket.\r\n
+comment5.params=cantidad
+comment5.target=void\ insertarDinero(java.lang.Integer)
+comment5.text=\r\n\ Recibe\ una\ suma\ de\ dinero\ del\ cliente.\r\n
+comment6.params=
+comment6.target=void\ printTicket()
+comment6.text=\r\n\ Imprime\ un\ ticket.\r\n\ Actualiza\ el\ total\ acumulado\ y\ vuevle\ a\ cero\ al\ balance.\r\n
+comment7.params=bal
+comment7.target=java.lang.Boolean\ limite(java.lang.Integer)
+numComments=8

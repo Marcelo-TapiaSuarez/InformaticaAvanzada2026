@@ -1,3 +1,7 @@
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![BlueJ](https://img.shields.io/badge/BlueJ-004C99?style=for-the-badge&logo=java&logoColor=white)
 # 👨🏽‍💻 Proyectos Académicos - 2026
 
 Bienvenido a mi repositorio central para las materias de **Informática Avanzada** y **Programación Avanzada**. Aquí guardo el respaldo de todos mis códigos, ejercicios y proyectos desarrollados durante la cursada.

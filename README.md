@@ -49,11 +49,18 @@ Dado que ambas materias comparten un núcleo temático fuerte en programación o
 
 ---
 
+## 📖 Bibliografía
+
+- **Libro:** Programación Orientada a Objetos con Java usando BlueJ, 6ª edición, David J. Barnes y Michael Kölling.
+
+---
+
 ## 📂 Estructura del Repositorio
 
 ```text
 .
 ├── Informatica Avanzada/      # Proyectos en su mayoria en español
-├── Programacion Avanzada/     # Proyectos y desafíos de Programación
+├── Programacion Avanzada/     # Proyectos del libro en ingles
+├── Proyectos/                 # Proyectos y desafíos de Programación
 ├── .gitignore                 # Filtro de archivos basura
 └── README.md                  # Esta guía

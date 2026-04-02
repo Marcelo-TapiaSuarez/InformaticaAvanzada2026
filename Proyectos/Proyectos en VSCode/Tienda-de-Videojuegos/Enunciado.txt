@@ -1,0 +1,22 @@
+Ejercicio Práctico: Sistema de Cobro "Gamer Store" 🎮
+Contexto:
+Estás desarrollando el sistema de caja registradora para una tienda de videojuegos. El sistema cuenta con dos estructuras de datos principales:
+
+Un HashMap<String, Double> catalogo: Funciona como la base de datos de la tienda. La clave es el código de barras del juego (String) y el valor es su precio (Double).
+
+Un ArrayList<String> carrito: Contiene los códigos de barras de los juegos que el cliente está a punto de pagar. Puede contener códigos repetidos si el cliente lleva varias copias del mismo juego.
+
+Datos de prueba sugeridos:
+
+Catálogo: ("ZELDA01", 59.99), ("MINECRAFT", 29.50), ("GTA_V", 35.00), ("FF_VII", 69.99).
+
+Carrito del cliente: ["ZELDA01", "MINECRAFT", "MINECRAFT", "GTA_V"]
+
+Misiones:
+Crea los siguientes tres métodos para procesar la compra del cliente:
+
+obtenerTicketLimpio(): El recibo no debe mostrar elementos repetidos en su resumen. Procesa el carrito y devuelve una nueva colección que contenga los códigos de los juegos sin duplicados y ordenados alfabéticamente.
+
+calcularTotal(): Calcula cuánto dinero debe pagar el cliente en total. Debes recorrer el carrito, buscar el precio de cada código en el catalogo y sumar los valores. Devuelve el monto total.
+
+aplicarDescuentoVIP(): La tienda da un regalo sorpresa si el cliente lleva algún juego Premium. Devuelve true si existe al menos un juego en el carrito cuyo precio en el catálogo sea estrictamente mayor a $60.0.

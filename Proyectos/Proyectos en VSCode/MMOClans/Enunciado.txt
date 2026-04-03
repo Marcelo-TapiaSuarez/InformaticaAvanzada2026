@@ -1,0 +1,27 @@
+Ejercicio Práctico: Sistema de Clanes MMO 🛡️
+Contexto:
+Estás desarrollando el sistema de gestión de Gremios/Clanes para un juego multijugador masivo. El sistema se divide en dos clases que colaboran entre sí.
+
+Parte 1: Clase Jugador
+Debe contener:
+
+Un String nickname y un int nivel.
+
+Un int idJugador (único para cada jugador).
+
+El desafío static: Una variable estática que funcione como contador global para generar los IDs de forma automática (el primer jugador creado en todo el programa será el ID 1, el segundo el ID 2, etc.).
+
+El desafío toString(): Sobrescribir el método para que, si el jugador se llama "Faker", es nivel 50 y su ID es 1, devuelva exactamente este texto: "[ID: 1] Faker (Lvl: 50)".
+
+Parte 2: Clase Clan
+Debe contener:
+
+Un HashSet<Jugador> miembros (para que no haya jugadores duplicados).
+
+Un HashMap<String, Jugador> directorio (donde la Clave es el nickname y el Valor es el objeto Jugador entero, para búsquedas ultra rápidas).
+
+Un método agregarJugador(Jugador j) que lo guarde en ambas colecciones al mismo tiempo.
+
+Un método imprimirPlantilla() que use un Stream sobre los miembros para imprimirlos por pantalla (aquí es donde el toString() hará su magia automáticamente).
+
+Un método nivelPromedio() que use un Stream para extraer los niveles de todos los jugadores y devuelva el promedio matemático.

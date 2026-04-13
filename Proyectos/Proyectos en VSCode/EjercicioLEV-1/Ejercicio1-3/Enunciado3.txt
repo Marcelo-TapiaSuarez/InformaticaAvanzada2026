@@ -1,0 +1,176 @@
+Implemente la clase Persona cumpliendo las siguientes condiciones:
+
+    Sus atributos son: nombre, edad, DNI, sexo ('H' hombre, 'M' mujer), peso y altura. No debe permitirse que se acceda directamente a ellos. 
+
+    Por defecto, todos los atributos menos el DNI serán valores por defecto según su tipo (0 números, cadena vacía para String, etc.). Sexo sera hombre por defecto, usa una constante para ello.
+
+    Se implantaran varios constructores:
+        Un constructor por defecto.
+        Un constructor con el nombre, edad y sexo, el resto por defecto.
+        Un constructor con todos los atributos como parámetro.
+
+    Los métodos que se implementaran son:
+        calcularIMC(): calculara si la persona esta en su peso ideal (peso en kg/(altura^2  en m)), 
+                       si esta fórmula devuelve un valor menor que 20, la función devuelve IMC.INFRAPESO, 
+                       si devuelve un número entre 20 y 25 (incluidos) la función devuelve IMC.PESO_IDEAL y 
+                       si devuelve un valor mayor que 25 significa que tiene sobrepeso, la función devuelve IMC.SOBREPESO. 
+
+                        public enum IMC {
+                            INFRAPESO,PESO_IDEAL,SOBREPESO;
+                        }
+
+        esMayorDeEdad(): indica si es mayor de edad, devuelve un booleano.
+
+        toString(): devuelve toda la información del objeto.
+                    Nombre: Juan Perez
+                    Sexo: hombre
+                    Edad: 22 anios
+                    DNI: 38332755
+                    Peso: 110.0 kg
+                    Altura: 1.9 metros
+        generaDNI(): genera un número aleatorio de 8 cifras entre 35 millones y 45 millones. 
+                     Este método sera invocado cuando se construya el objeto. No será visible al exterior.
+        
+        Métodos set de cada parámetro, excepto de DNI.
+    
+
+Prueba:
+
+Persona p = new Persona ("Juan Perez",22,'H',110,1.9);
+assertTrue(p.toString().toLowerCase().contains("Nombre: Juan Perez".toLowerCase()));
+assertTrue(p.toString().toLowerCase().contains("Edad: 22".toLowerCase()));
+assertTrue(p.toString().toLowerCase().contains("Sexo: hombre".toLowerCase()));
+assertTrue(p.toString().toLowerCase().contains("Peso: 110".toLowerCase()));
+assertTrue(p.toString().toLowerCase().contains("Altura: 1.9".toLowerCase()));
+
+
+Codigo:
+import java.util.Random;
+
+public class Persona {
+    //Constantes
+    /**
+     * Sexo por defecto
+     */
+    
+    //Atributos
+    
+    //Contructores
+    
+    /**
+     * Constructor por defecto
+     */
+    public Persona() {
+    
+        
+    }
+
+    /**
+     * Constructor con 3 parametroe
+     *
+     * @param nombre de la persona
+     * @param edad de la persona
+     * @param sexo de la persona
+     */
+    public Persona(String nombre, int edad, char sexo) {
+    
+    
+    }
+
+    /**
+     * Constructor con 5 parametros
+     *
+     * @param nombre de la persona
+     * @param edad de la persona
+     * @param sexo de la persona
+     * @param peso de la persona
+     * @param altura de la persona
+     */
+    public Persona(String nombre, int edad, char sexo, double peso, double altura) {
+    
+        
+    }
+
+    private void generarDni() {
+
+        
+    }
+
+
+    //Metodos publicos
+    /**
+     * Modifica el nombre de la persona
+     *
+     * @param nombre a cambiar
+     */
+    public void setNombre(String nombre) {
+
+    }
+
+    /**
+     * Modifica la edad de la persona
+     *
+     * @param edad a cambiar
+     */
+    public void setEdad(int edad) {
+
+    }
+
+    /**
+     * Modifica el sexo de la persona, comprueba que es correcto
+     *
+     * @param sexo a cambiar
+     */
+    public void setSexo(char sexo) {
+
+    }
+
+    /**
+     * Modifica el peso de la persona
+     *
+     * @param peso a cambiar
+     */
+    public void setPeso(double peso) {
+
+    }
+
+    /**
+     * Modifica la altura de la persona
+     *
+     * @param altura a cambiar
+     */
+    public void setAltura(double altura) {
+
+    }
+
+    /**
+     * Calcula el indice de masa corporal
+     *
+     * @return IMC.INFRAPESO: la persona esta por debajo de su peso ideal
+     * IMC.PESO_IDEAL: la persona esta en su peso ideal
+     * IMC.SOBREPESO: la persona esta por encima de su peso ideal
+     */
+    public IMC calcularIMC() {
+        return null;
+    }
+
+    /**
+     * Indica si la persona es mayor de edad
+     *
+     * @return true si es mayor de edad y false es menor de edad
+     */
+    public boolean esMayorDeEdad() {
+        return false;
+    }
+
+    /**
+     * Devuelve informacion del objeto
+     *
+     * @return cadena con toda la informacion
+     */
+    @Override
+    public String toString() {
+        return null;
+    }
+
+}

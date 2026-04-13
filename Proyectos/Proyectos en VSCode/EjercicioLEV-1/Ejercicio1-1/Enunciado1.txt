@@ -1,0 +1,19 @@
+Implemente la clase Rectangulo de acuerdo al siguiente diagrama de clases.
+
+----- Campos -----
+int alto
+int largo
+------------------
+
+------------ Métodos -------------
+Rectangulo()
+Rectangulo(int largo, int alto)
+int getLargo()
+int getArea()
+int getPerimetro()
+void setLargo(int largo)
+void setAlto(int alto)
+----------------------------------
+
+
+La clase debe validar los parámetros en los setter, de forma tal que no acepte valores negativos para las dimensiones. 

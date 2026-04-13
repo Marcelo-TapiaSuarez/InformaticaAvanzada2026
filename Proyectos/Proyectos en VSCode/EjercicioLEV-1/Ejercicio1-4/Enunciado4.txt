@@ -1,0 +1,90 @@
+Implementa la clase Cuenta que tendrá los siguientes atributos: titular y cantidad (de tipo double).
+
+El titular será obligatorio y la cantidad es opcional. Implemente dos constructores que cumplan con esta condición.
+
+Implemente los métodos get, set y toString (tal como es muestra en el ejemplo).
+
+Tendrá dos métodos especiales:
+
+ingresar(double cantidad): se ingresa una cantidad a la cuenta, si la cantidad introducida es negativa, no se hará nada.
+
+retirar(double cantidad): se retira una cantidad a la cuenta, si restando la cantidad actual a la que nos pasan es negativa, 
+                          la cantidad de la cuenta pasa a ser 0.
+
+
+Codigo:
+
+public class Cuenta {
+    //Atributos
+
+
+    //Constructores
+    public Cuenta(String titular) {
+        
+        
+    }
+
+    public Cuenta(String titular, double cantidad) {
+    
+        
+    }
+
+    //Metodos
+    public String getTitular() {
+        return null;
+    }
+    public void setTitular(String titular) {
+        
+    }
+    public double getCantidad() {
+        return null;
+    }
+    public void setCantidad(double cantidad) {
+        
+    
+    }
+
+    /**
+     * Ingresa dinero en la cuenta,
+     * solo si es positiva la cantidad
+     *
+     * @param cantidad
+     */
+    public void ingresar(double cantidad) {
+    
+        
+    }
+
+    /**
+     * Retira una cantidad en la cuenta, si se quedara en negativo se quedaria
+     * en cero
+     *
+     * @param cantidad
+     */
+    public void retirar(double cantidad) {
+        
+        
+    }
+
+    /**
+     * Devuelve el estado del objeto
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return null;
+    }
+
+}
+
+
+Prueba:
+
+Cuenta c = new Cuenta("Pablo Gomez",0.0);
+assertEquals(c.getCantidad(),0.0);
+assertEquals(c.getTitular(),"Pablo Gomez");
+c.ingresar(10.0);
+assertEquals(c.getCantidad(),10.0);
+c.retirar(3.0);
+assertEquals(c.getCantidad(),7.0);

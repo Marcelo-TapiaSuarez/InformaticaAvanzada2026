@@ -1,0 +1,91 @@
+Implemente una clase llamada Password que siga las siguientes condiciones:
+
+    Que tenga los atributos longitud y contraseña . Por defecto, la longitud sera de 8.
+    Los constructores serán los siguiente:
+        Un constructor por defecto.
+        Un constructor con la longitud que nosotros le pasemos. Generara una contraseña aleatoria con esa longitud.
+
+    Los métodos que implementa serán:
+        esFuerte(): devuelve un booleano si es fuerte o no, para que sea fuerte debe tener mas de 2 mayúsculas, mas de 1 minúscula y mas de 5 números.
+
+
+Codigo:
+public class Password {
+
+    //Constantes
+    /**
+     * Longitud por defecto
+     */
+
+
+    //Atributos
+    /**
+     * Longitud de la contrasenia
+     */
+    private int longitud;
+    /**
+     * caracteres de la contrasenia
+     */
+    private String contrasenia;
+
+    //Constructor
+    /**
+     * La contrasenia sera la pasada por parametro
+     * @param contrasenia
+     */
+    public Password (String contrasenia){
+
+    }
+    /**
+     * La contrasenia sera la pasada por parametro
+     * @param longitud
+     */
+    public Password (int longitud){
+    
+        
+    }
+    //Metodos publicos
+    /**
+     * Devuelve la longitud
+     * @return longitud de la contrasenia
+     */
+    public int getLongitud() {
+        return longitud;
+    }
+    /**
+     * Modifica la longitud de la contrasenia
+     * @param longitud a cambiar
+     */
+    public void setLongitud(int longitud) {
+        this.longitud = longitud;
+    }
+    /**
+     * Devuelve la contrasenia
+     * @return contrasenia
+     */
+    public String getContrasenia() {
+        return contrasenia;
+    }
+    /**
+     * Comprueba la fortaleza de la contrasenia
+     * @return
+     */
+    public boolean esFuerte(){
+        return false;
+    }
+    /**
+     * Genera una contrasenia al azar con la longitud que este definida
+     * @return contrasenia
+     */
+    public String generaPassword (){
+        return null;
+    }
+}
+
+Prueba:
+Password p = new Password(8);
+p.generaPassword();
+assertEquals(p.getLongitud(),8);
+p.setLongitud(9);
+p.generaPassword();
+assertEquals(p.getLongitud(),9);

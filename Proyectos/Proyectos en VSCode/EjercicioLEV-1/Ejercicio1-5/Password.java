@@ -75,12 +75,13 @@ public class Password {
      */
     public boolean esFuerte()
     {
-        char pass[] = contrasenia.toCharArray();
+        char pass[] = new char[contrasenia.length()];
+        pass = contrasenia.toCharArray();
         int n=0;
         int m=0;
         int M=0;
 
-        for(int i=0; i < longitud; i++)
+        for(int i=0; i < contrasenia.length(); i++)
         {
             if(pass[i] >= 48 && pass[i] <= 57)
             {
@@ -96,7 +97,7 @@ public class Password {
             }
         }
 
-        return n > 5 && m > 1 && M > 2 ? true : false;
+        return n >= 5 && m >= 1 && M >= 2 ? true : false;
     }
 
     /**

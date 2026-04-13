@@ -1,0 +1,73 @@
+Considere el siguiente diagrama de clases
+
+Completar la clase Gondola definiendo para <TBD> una colección que agrupe los productos pertenecientes a la misma. 
+Recuerde además completar todos los métodos indicados en la clase.
+
+La colección elegida no debe permitir duplicados.
+
+
+Codigo:
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Gondola {
+    private String pasillo;
+    private <TBD> productos;  // Definir clase de coleccion a utilizar
+    
+    //Constructor
+    public Gondola (String pasillo){
+            // Completar este metodo inicializando todos los atributos 
+    }
+    
+    //Metodos
+    //getters
+    public String getPasillo (){
+        return pasillo;
+    }
+
+   /**
+   * Este metodo devuelve la coleccion que contiene los productos 
+   * que se encuentran en la gondola. 
+   * @return La coleccion con el listado de productos.
+   */
+    public <TBD> getProductos(){  // Definir clase de coleccion 
+            // Completar este metodo
+    }
+    
+    //setters
+    public void setPasillo (String pasillo){
+            // Completar este metodo
+    }
+
+   /**
+   * Este metodo permite agregar un producto a la coleccion elegida   
+   * @param producto El producto que se desea agregar a la coleccion.
+   */
+    public void agregarProducto (Producto producto){
+        // Completar este metodo    
+    }
+    
+    /**
+   * Este metodo devuelve la cantidad de productos pertenecientes en la
+   * gondola.
+   * @return Cantidad de productos en la coleccion.
+   */
+    public int cantidadProductos (){
+        // Completar este metodo
+    }
+}
+
+Prueba:
+
+Gondola gondola = new Gondola ("Pasillo A");
+Producto a = new Producto(1999666,"Queso",125.22);
+Producto b = new Producto(4444222,"Yogurt",50.12);
+gondola.agregarProducto(a);
+gondola.agregarProducto(b);
+try {
+    assertEquals(gondola.getProductos().size(),2);
+    currentTestResult = TestResult.PASS;
+}
+catch (Exception ex){
+}

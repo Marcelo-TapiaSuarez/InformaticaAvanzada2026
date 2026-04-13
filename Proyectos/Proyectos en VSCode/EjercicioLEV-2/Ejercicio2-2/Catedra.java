@@ -1,0 +1,61 @@
+import java.util.HashSet;
+//import java.util.ArrayList;
+
+public class Catedra 
+{
+    private String materia;
+    // declare la variable y el tipo apropiados para agrupar los docentes de la catedra
+    private HashSet<Docente> lista;
+    
+    //Constructor
+    public Catedra (String materia)
+    {
+        //Inicialice TODOS loes atributos de la clase
+        this.materia = materia;
+        lista = new HashSet<>();
+    }
+    
+    //Metodos
+    //getters
+    public String getMateria (){
+        return materia;
+    }
+
+   /**
+   * Este metodo devuelve la coleccion que contiene los docentes 
+   * pertenecientes a la catedra. Debe seleccionar y reemplazar
+   * <TBD> con una colección que no permita duplicados
+   * @return La coleccion con el listado de docentes.
+   */
+    public HashSet<Docente> getListado()
+    {
+        return lista ;  // Recuerde modificar esta linea 
+    }
+    
+    //setters
+    public void setMateria (String materia)
+    {
+        this.materia=materia;
+    }
+
+   /**
+   * Este metodo permite agregar un alumno a la coleccion elegida   
+   * @param docente Docente que se desea agregar a la coleccion.
+   */
+    public void agregarDocente (Docente docente)
+    {
+        // Complete este metodo
+        lista.add(docente);
+    }
+    
+    /**
+   * Este metodo devuelve la cantidad de docentes pertenecientes a la 
+   * catedra.
+   * @return Cantidad de docentes en la coleccion.
+   */
+    public int cantidadDocentes ()
+    {
+        // Complete este metodo
+        return lista.size();
+    }
+}

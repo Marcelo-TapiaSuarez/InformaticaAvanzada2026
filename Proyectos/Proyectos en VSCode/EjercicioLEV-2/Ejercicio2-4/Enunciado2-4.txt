@@ -1,0 +1,71 @@
+Completar la clase Registrador definiendo una colección que agrupe los registros de temperatura y humedad. 
+Recuerde además completar los métodos que estén definidos.
+
+Es importante que el método getListado devuelva una colección de la cual puedan obtenerse los registros en el orden en que fueron ingresados. 
+
+
+Codigo:
+import java.util.HashSet;
+import java.util.ArrayList;
+
+public class Registrador {
+    private String designacion;
+    private        registros; //Definir coleccion apropiada
+    
+    //Constructor
+    public Registrador (String designacion){
+// Completar metodo
+    }
+    
+    //Metodos
+    //getters
+    public String getDesignacion (){
+        return designacion;
+    }
+
+   /**
+   * Este metodo devuelve la coleccion que contiene los registros 
+   * guardados. 
+   * @return La coleccion con el listado de registros.
+   */
+    public                 getRegistros(){ //Definir coleccion apropiada
+       // Completar metodo  
+    }
+    
+   /**
+   * Este metodo devuelve el objeto del tipo Registro en la posicion
+   * i de la coleccion.
+   * @param  i  El indice solicitado
+   * @return El registro con indice i.
+   */
+    public Registro getRegistro (int i){
+        return null  // No olvide modificar esta linea
+    }
+    //setters
+    public void setDesignacion (String designacion){
+// Completar metodo
+    }
+
+   /**
+   * Este metodo permite agregar un registro a la coleccion elegida   
+   * @param registro Registro que se desea agregar a la coleccion.
+   */
+    public void agregarRegistro (Registro registro){
+// Completar metodo
+    }
+}
+
+Prueba:
+
+Registrador r = new Registrador ("Datalogger1");
+Registro a = new Registro("Celsius",25.5,"22:30 12/12/2018");
+Registro b = new Registro("Celsius",25.7,"22:40 12/12/2018");
+r.agregarRegistro(a);
+r.agregarRegistro(b);
+try {
+assertEquals(a, r.getRegistros().get(0));
+assertEquals(b, r.getRegistros().get(1));
+}
+catch (Exception ex){
+}
+currentTestResult = TestResult.PASS;

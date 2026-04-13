@@ -1,0 +1,79 @@
+Considere el siguiente diagrama de clases
+
+Asumiendo que la clase Alumno está implementada, complete la clase Aula, 
+defina la colección que agrupe los alumnos pertenecientes al curso de Informática (figura como <TBD> en el diagrama de clases) y 
+completar los métodos indicados.
+
+Es importante la colección elegida permita obtener los alumnos en el orden en que fueron ingresados. 
+
+
+Codigo:
+
+import java.util.HashSet;
+import java.util.ArrayList;
+
+public class Aula {
+    private String materia;
+    // Utilizar la coleccion que considere apropiada
+    // Defina una coleccion para el listadoDeAlumnos
+    //<TBD> listadoDeAlumnos;
+    
+    //Constructor
+    public Aula (String materia){
+        this.materia = materia;
+        //complete el constuctor
+    }
+    
+    //Metodos
+    //getters
+    public String getMateria (){
+        return materia;
+    }
+
+   /**
+   * Este metodo devuelve la coleccion que contiene los alumnos 
+   * pertenecientes al curso. 
+   * @return La coleccion con el listado de alumnos.
+   */
+    public <TBD> getListado(){
+        //Implemente este metodo
+        return null;   // No olvide modificar esta linea
+    }
+    
+   /**
+   * Este metodo devuelve el objeto del tipo Alumno en la posicion
+   * i de la coleccion.
+   * @param  i  El indice solicitado
+   * @return El alumno con indice i.
+   */
+    public Alumno getAlumno(int i){
+        //Implemente este metodo
+        return null;   // No olvide modificar esta linea
+    }
+    //setters
+    public void setMateria (String materia){
+        this.materia=materia;
+    }
+
+   /**
+   * Este metodo permite agregar un alumno a la coleccion elegida   
+   * @param alumno Alumno que se desea agregar a la coleccion.
+   */
+    public void agregarAlumno (Alumno alumno){
+        //Implemente este metodo
+    }
+}
+
+Prueba:
+Aula aula = new Aula ("Informatica");
+Alumno a = new Alumno("A1999666","Ernesto Sabato",25);
+Alumno b = new Alumno("A4444222","Roberto Fontanarosa",33);
+aula.agregarAlumno(a);
+aula.agregarAlumno(b);
+try {
+assertEquals(a, aula.getListado().get(0));
+assertEquals(b, aula.getListado().get(1));
+}
+catch (Exception ex){
+}
+currentTestResult = TestResult.PASS;

@@ -35,6 +35,7 @@ public class Bolsa
         PESO_MAXIMO = peso;
         this.nombre = nombre;
         porNombre = new TreeMap<>();
+        pesoActual = 0;
     }
 
     /**
@@ -56,10 +57,10 @@ public class Bolsa
      */
     public void addElemento (Elemento obj) 
     {
-        // TODO - Implementar metodo
-        if(!(obj.getPeso() > getPesoMaximo()) && !porNombre.containsKey(obj.getNombre()))
+
+        if(obj.getPeso() <= getPesoLibre() && !getMapaDeElementos().containsKey(obj.getNombre()))
         {
-            porNombre.put(obj.getNombre(), obj);
+            getMapaDeElementos().put(obj.getNombre(), obj);
             addPeso(obj.getPeso());
         }
         else
@@ -77,17 +78,12 @@ public class Bolsa
      */
     public Elemento delElemento (String nombre) 
     {
-        // TODO - Implementar metodo
-        if(porNombre.containsKey(nombre))
-        {
-            Elemento eliminado = new Elemento(nombre, porNombre.get(nombre).getPeso());
 
-            addPeso(-porNombre.get(nombre).getPeso());
-            porNombre.remove(nombre);
+        Elemento eliminado = getMapaDeElementos().remove(nombre);
 
-            return eliminado;
-        }
-        return null;
+        if(eliminado != null) addPeso(-eliminado.getPeso());
+
+        return eliminado;
     }
 
     /**
@@ -95,12 +91,11 @@ public class Bolsa
      * 
      * @return ArrayList<Elemento> lista con los elementos de la bolsa.
      */
-    public ArrayList<String> getElementosEnLaBolsa() 
+    public ArrayList<Elemento> getElementosEnLaBolsa() 
     {
-        // TODO - Implementar metodo
-        ArrayList<String> enBolsa = new ArrayList<>();
+        ArrayList<Elemento> enBolsa = new ArrayList<>();
         
-        for(String e : porNombre.keySet())
+        for(Elemento e : getMapaDeElementos().values())
         {
             enBolsa.add(e);
         }
@@ -117,13 +112,16 @@ public class Bolsa
      */
     public ArrayList<Elemento> getElementosConPrefijo(String pre) 
     {
-        // TODO - Implementar metodo
         ArrayList<Elemento> elementosConPrefijo = new ArrayList<>();
-        for(String prefijo : porNombre.keySet())
+
+        if(pre != null)
         {
-            if(prefijo.startsWith(pre))
+            for(Elemento prefijo : getMapaDeElementos().values())
             {
-                elementosConPrefijo.add(porNombre.get(prefijo));
+                if(prefijo.getNombre().startsWith(pre))
+                {
+                    elementosConPrefijo.add(prefijo);
+                }
             }
         }
         return elementosConPrefijo;
@@ -138,9 +136,7 @@ public class Bolsa
      */
     public int getPesoLibre () 
     {
-        // TODO - Implementar metodo
-
-        return PESO_MAXIMO - pesoActual;
+        return getPesoMaximo() - getPesoActual();
     }
 
     /**
@@ -151,7 +147,6 @@ public class Bolsa
      */
     public void addPeso (int peso) 
     {
-        // TODO - Implementar metodo
         pesoActual += peso;
     }
 

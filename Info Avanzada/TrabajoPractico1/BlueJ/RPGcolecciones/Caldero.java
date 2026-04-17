@@ -14,7 +14,8 @@ import java.util.TreeMap;
  * superen la cantidad maxima de ingredientes del caldero (capacidad).
  * 
  */
-public class Caldero {
+public class Caldero 
+{
     private final Integer MAX_INGREDIENTES;
     private String nombre;
     private Receta receta;
@@ -33,10 +34,11 @@ public class Caldero {
      */
     public Caldero (String nombre, Integer capacidad) 
     {
-        // TODO - Implementar metodo
         this.nombre = nombre;
         MAX_INGREDIENTES = capacidad;
         elementos = new TreeMap<>();
+        receta = null;
+        pocima = null;
     }
 
     /**
@@ -61,18 +63,18 @@ public class Caldero {
      */
     public void setReceta (Receta receta) 
     {
-        // TODO - Implementar metodo
-        if(receta.getCantidadIngredientes() <= MAX_INGREDIENTES && this.receta == null && pocima == null)
+
+        if(getReceta() == null && pocima == null && receta != null && receta.getCantidadIngredientes() <= getCapacidad())
         {
             this.receta = receta;
             for(String ingrediente : receta.getIngredientes())
             {
-                elementos.put(ingrediente, null);
+                getIngredientes().put(ingrediente, null);
             }
         }
         else
         {
-            System.out.println(nombre + ": No se puede agregar la receta");
+            System.out.println(getNombre() + ": No se puede agregar la receta");
         }
     }
 
@@ -88,10 +90,10 @@ public class Caldero {
      */
     public void addIngrediente (Elemento ingrediente) 
     {
-        // TODO - Implementar metodo
-        if(receta != null && receta.getIngredientes().contains(ingrediente.getNombre()))
+
+        if(ingrediente != null && getReceta() != null && getReceta().getIngredientes().contains(ingrediente.getNombre()))
         {
-            elementos.put(ingrediente.getNombre(), ingrediente);
+            getIngredientes().put(ingrediente.getNombre(), ingrediente);
         }
 
     }
@@ -107,15 +109,16 @@ public class Caldero {
      * 
      * @return La lista con los nombres de los ingredientes faltantes.
      */
-     public List<String> getIngredientesFaltantes () 
+    public List<String> getIngredientesFaltantes () 
     {
-        // TODO - Implementar metodo
-        if(receta == null) return null;
+
+        if(getReceta() == null) return null;
+        
         ArrayList<String> faltantes = new ArrayList<>();
         
-        for(String nombreElemento : receta.getIngredientes())
+        for(String nombreElemento : getReceta().getIngredientes())
         {
-            if(elementos.get(nombreElemento) == null)
+            if(getIngredientes().get(nombreElemento) == null)
             {
                 faltantes.add(nombreElemento);
             }
@@ -131,8 +134,8 @@ public class Caldero {
      */
     public Boolean verificarIngredientes () 
     {
-        // TODO - Implementar metodo
-        return getIngredientesFaltantes().isEmpty() ? true : false;
+
+        return (getReceta() != null && getIngredientesFaltantes() != null && getIngredientesFaltantes().isEmpty()) ? true : false;
     }
 
     /**
@@ -155,18 +158,18 @@ public class Caldero {
      */
     public void prepararPocima () 
     {
-        // TODO - Implementar metodo
-        if(!elementos.containsValue(null) && receta != null && verificarIngredientes())
+
+        if(getReceta() != null && verificarIngredientes())
         {
-            Integer pesoTotal = 0;
-            for(Elemento e : elementos.values())
+            int pesoTotal = 0;
+            for(Elemento e : getIngredientes().values())
             {
                 pesoTotal += e.getPeso();
             }
-            pocima = new Elemento("Pocima de " + receta.getNombre(), pesoTotal);
+            pocima = new Elemento("Pocima de " + getReceta().getNombre(), pesoTotal);
             
             receta = null;
-            elementos.clear();
+            getIngredientes().clear();
         }
         else
         {
@@ -181,7 +184,9 @@ public class Caldero {
      */
     public Elemento getPocima() 
     {
-        // TODO - Implementar metodo
+
+        if(pocima == null) return null;
+
         Elemento p = pocima;
         pocima = null;
         
@@ -208,17 +213,17 @@ public class Caldero {
     @Override
     public String toString() 
     {
-        // TODO - Implementar metodo
-        if(receta == null && pocima == null)
+
+        if(getReceta() == null && pocima == null)
         {
             return getNombre() + ": vacio";
         }
         else if(pocima == null)
         {
-            return getNombre() + ": " + receta.getNombre();
+            return getNombre() + ": " + getReceta().getNombre();
         }
         
-        return getNombre() + ": " + pocima.getNombre();
+        return getNombre() + ": " + getPocima().getNombre();
     }
 
     /**

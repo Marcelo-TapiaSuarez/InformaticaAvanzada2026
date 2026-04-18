@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Esta clase modela un personaje de un juego de rol.
  */
@@ -30,11 +32,14 @@ public class Personaje
      */
     public Personaje (String nombre, Integer vida, Integer peso) 
     {
-        // TODO - Implementar metodo
+
         this.nombre = nombre;
+        this.vida = vida;
         MAX_VIDA = vida;
-        this.vida = MAX_VIDA;
         PESO_MAXIMO_BOLSA = peso;
+        objeto = null;
+        caldero = null;
+        bolsa = null;
     }
 
     /**
@@ -54,16 +59,26 @@ public class Personaje
      */
     public void setBolsa(Bolsa bolsa) 
     {
-        // TODO - Implementar metodo
-        if(bolsa.getPesoMaximo() <= PESO_MAXIMO_BOLSA && getBolsa() == null)
+        if(bolsa == null || bolsa.getPesoMaximo() > PESO_MAXIMO_BOLSA)
+        {
+            System.out.println("Bolsa inapropiada");
+            return;
+        }
+        
+        if(getBolsa() == null)
         {
             this.bolsa = bolsa;
         }
-        else
+        else if(bolsa.getPesoMaximo() > getBolsa().getPesoMaximo())
         {
-            System.out.println("Bolsa inapropiada");
+            for(Elemento e : getBolsa().getElementosEnLaBolsa())
+            {
+                bolsa.addElemento(e);
+                getBolsa().delElemento(e.getNombre());
+            }
+            this.bolsa = bolsa;
         }
-
+        else System.out.println("Bolsa inapropiada");
     }
 
     /**
@@ -84,12 +99,19 @@ public class Personaje
      */
     public void guardarElemento() 
     {
-        // TODO - Implementar metodo
         if(getElemento() == null)
         {
-            
+            System.out.println("No hay elemento para agregar a la bolsa");
+            return;
         }
 
+        if(getBolsa() == null) return;
+
+        int cantidad = getBolsa().getElementosEnLaBolsa().size();
+
+        getBolsa().addElemento(getElemento());
+
+        if(getBolsa().getPesoActual() > cantidad) objeto = null;
     }
 
     /**
@@ -102,11 +124,23 @@ public class Personaje
      * 
      * @param nombre El elemento a tomar de la bolsa.
      */
-    public void tomarElemento (String nombre) {
-        // TODO - Implementar metodo
+    public void tomarElemento (String nombre) 
+    {
+        if(nombre == null) return;
+
+        if(getBolsa() != null)
+        {
+            Elemento sacado = getBolsa().delElemento(nombre);
+
+            if(sacado == null)
+            {
+                System.out.println("No se cuenta con el " + nombre);
+            }
+            else objeto = sacado;
+        }
 
     }
-    
+
     /**
      * Asigna el caldero al personaje.
      * 
@@ -139,9 +173,32 @@ public class Personaje
      * 
      * @param receta
      */
-    public void prepararReceta (Receta receta) {
-        // TODO - Implementar metodo
+    public void prepararReceta (Receta receta) 
+    {
+        if(receta == null || getCaldero() == null) return;
 
+        getCaldero().setReceta(receta);
+
+        if(getBolsa() != null)
+        {
+            for(String ingrediente : receta.getIngredientes())
+            {
+                Elemento sacado = getBolsa().delElemento(ingrediente);
+                
+                if(sacado != null)
+                {
+                    getCaldero().addIngrediente(sacado);
+                }
+            }
+        }
+        
+
+        if(!getCaldero().getIngredientesFaltantes().isEmpty())
+        {
+            System.out.println("Faltan " + getCaldero().getIngredientesFaltantes().size() + " ingredientes para " + receta.getNombre());
+            return;
+        }
+        else getCaldero().prepararPocima();
     }
 
     public String getNombre() {

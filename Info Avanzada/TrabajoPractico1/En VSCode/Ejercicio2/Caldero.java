@@ -184,7 +184,6 @@ public class Caldero
      */
     public Elemento getPocima() 
     {
-
         if(pocima == null) return null;
 
         Elemento p = pocima;
@@ -213,7 +212,6 @@ public class Caldero
     @Override
     public String toString() 
     {
-
         if(getReceta() == null && pocima == null)
         {
             return getNombre() + ": vacio";

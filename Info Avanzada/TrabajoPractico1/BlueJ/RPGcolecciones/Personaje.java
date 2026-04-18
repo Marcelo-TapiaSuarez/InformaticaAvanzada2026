@@ -29,8 +29,13 @@ public class Personaje {
      */
     public Personaje (String nombre, Integer vida, Integer peso) {
         // TODO - Implementar metodo
-        MAX_VIDA = 0;          // Ojo, esta linea no es valida
-        PESO_MAXIMO_BOLSA = 0; // Ojo, esta linea no es valida
+        this.nombre = nombre;
+        this.vida = vida;
+        MAX_VIDA = vida;
+        PESO_MAXIMO_BOLSA = peso;
+        objeto = null;
+        caldero = null;
+        bolsa = null;
     }
 
     /**
@@ -50,7 +55,26 @@ public class Personaje {
      */
     public void setBolsa(Bolsa bolsa) {
         // TODO - Implementar metodo
-
+        if(bolsa == null || bolsa.getPesoMaximo() > PESO_MAXIMO_BOLSA)
+        {
+            System.out.println("Bolsa inapropiada");
+            return;
+        }
+        
+        if(getBolsa() == null)
+        {
+            this.bolsa = bolsa;
+        }
+        else if(bolsa.getPesoMaximo() > getBolsa().getPesoMaximo())
+        {
+            for(Elemento e : getBolsa().getElementosEnLaBolsa())
+            {
+                bolsa.addElemento(e);
+                getBolsa().delElemento(e.getNombre());
+            }
+            this.bolsa = bolsa;
+        }
+        else System.out.println("Bolsa inapropiada");
     }
 
     /**
@@ -71,7 +95,19 @@ public class Personaje {
      */
     public void guardarElemento() {
         // TODO - Implementar metodo
+        if(getElemento() == null)
+        {
+            System.out.println("No hay elemento para agregar a la bolsa");
+            return;
+        }
 
+        if(getBolsa() == null) return;
+
+        int cantidad = getBolsa().getElementosEnLaBolsa().size();
+
+        getBolsa().addElemento(getElemento());
+
+        if(getBolsa().getPesoActual() > cantidad) objeto = null;
     }
 
     /**
@@ -86,7 +122,18 @@ public class Personaje {
      */
     public void tomarElemento (String nombre) {
         // TODO - Implementar metodo
+        if(nombre == null) return;
 
+        if(getBolsa() != null)
+        {
+            Elemento sacado = getBolsa().delElemento(nombre);
+
+            if(sacado == null)
+            {
+                System.out.println("No se cuenta con el " + nombre);
+            }
+            else objeto = sacado;
+        }
     }
     
     /**
@@ -123,7 +170,30 @@ public class Personaje {
      */
     public void prepararReceta (Receta receta) {
         // TODO - Implementar metodo
+        if(receta == null || getCaldero() == null) return;
 
+        getCaldero().setReceta(receta);
+
+        if(getBolsa() != null)
+        {
+            for(String ingrediente : receta.getIngredientes())
+            {
+                Elemento sacado = getBolsa().delElemento(ingrediente);
+                
+                if(sacado != null)
+                {
+                    getCaldero().addIngrediente(sacado);
+                }
+            }
+        }
+        
+
+        if(!getCaldero().getIngredientesFaltantes().isEmpty())
+        {
+            System.out.println("Faltan " + getCaldero().getIngredientesFaltantes().size() + " ingredientes para " + receta.getNombre());
+            return;
+        }
+        else getCaldero().prepararPocima();
     }
 
     public String getNombre() {

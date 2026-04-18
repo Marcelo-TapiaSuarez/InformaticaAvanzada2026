@@ -28,9 +28,12 @@ public class Bolsa {
      * @param nombre El nombre de la bolsa.
      * @param peso El peso maximo que puede contener la bolsa
      */
-    public Bolsa (String nombre, int peso) {
-        // TODO - Implementar metodo
-        PESO_MAXIMO = 0; // Ojo, esta linea no es valida
+    public Bolsa (String nombre, int peso) 
+    {
+        PESO_MAXIMO = peso;
+        this.nombre = nombre;
+        porNombre = new TreeMap<>();
+        pesoActual = 0;
     }
 
     /**
@@ -52,7 +55,15 @@ public class Bolsa {
      */
     public void addElemento (Elemento obj) {
         // TODO - Implementar metodo
-
+        if(obj.getPeso() <= getPesoLibre() && !getMapaDeElementos().containsKey(obj.getNombre()))
+        {
+            getMapaDeElementos().put(obj.getNombre(), obj);
+            addPeso(obj.getPeso());
+        }
+        else
+        {
+            System.out.println(getNombre() + ": No se puede agregar " + obj.getNombre());
+        }
     }
 
     /**
@@ -64,7 +75,11 @@ public class Bolsa {
      */
     public Elemento delElemento (String nombre) {
         // TODO - Implementar metodo
-        return null;
+        Elemento eliminado = getMapaDeElementos().remove(nombre);
+
+        if(eliminado != null) addPeso(-eliminado.getPeso());
+
+        return eliminado;
     }
 
     /**
@@ -74,7 +89,13 @@ public class Bolsa {
      */
     public ArrayList<Elemento> getElementosEnLaBolsa() {
         // TODO - Implementar metodo
-        return null;
+        ArrayList<Elemento> enBolsa = new ArrayList<>();
+        
+        for(Elemento e : getMapaDeElementos().values())
+        {
+            enBolsa.add(e);
+        }
+        return enBolsa;
     }
 
     /**
@@ -87,7 +108,19 @@ public class Bolsa {
      */
     public ArrayList<Elemento> getElementosConPrefijo(String pre) {
         // TODO - Implementar metodo
-        return null;
+        ArrayList<Elemento> elementosConPrefijo = new ArrayList<>();
+
+        if(pre != null)
+        {
+            for(Elemento prefijo : getMapaDeElementos().values())
+            {
+                if(prefijo.getNombre().startsWith(pre))
+                {
+                    elementosConPrefijo.add(prefijo);
+                }
+            }
+        }
+        return elementosConPrefijo;
     }
 
     /**
@@ -99,7 +132,7 @@ public class Bolsa {
      */
     public int getPesoLibre () {
         // TODO - Implementar metodo
-        return -1;
+        return getPesoMaximo() - getPesoActual();
     }
 
     /**
@@ -110,7 +143,7 @@ public class Bolsa {
      */
     public void addPeso (int peso) {
         // TODO - Implementar metodo
-
+        pesoActual += peso;
     }
 
     public int getPesoActual() {

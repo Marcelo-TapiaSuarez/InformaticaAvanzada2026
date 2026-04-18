@@ -117,21 +117,15 @@ public class Receta {
     public String toString() 
     {
         // TODO - Implementar metodo
-        if(getCantidadIngredientes() != 0)
+        
+        String listaIngredientes = "";
+        for(String ingrediente : ingredientes)
         {
-            String listaIngredientes = "";
-            for(String ingrediente : ingredientes)
-            {
-                listaIngredientes = listaIngredientes + ingrediente + "\n";
-            }
-            
-            return !isCerrada() ? "Receta " + nombre + " (incompleta)" + "\nIngredientes:" + "\n" + listaIngredientes : 
-                                  "Receta " + nombre + " (completa)" + "\nIngredientes:" + "\n" + listaIngredientes;
+            listaIngredientes = listaIngredientes + ingrediente + "\n";
         }
-        else
-        {
-            return "Receta " + nombre + " (incompleta)";
-        }
+        
+        return !isCerrada() ? "Receta " + nombre + " (incompleta)" + "\nIngredientes:" + "\n" + listaIngredientes : 
+                                "Receta " + nombre + " (completa)" + "\nIngredientes:" + "\n" + listaIngredientes;
     }
 
     /**

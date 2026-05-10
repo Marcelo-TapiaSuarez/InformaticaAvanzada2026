@@ -1,0 +1,28 @@
+Ejercicio Práctico: Sistema de Liquidación de Sueldos
+
+Contexto:
+Una empresa de desarrollo de software necesita un sistema básico para calcular el pago mensual de su personal. En la empresa trabajan distintos tipos de empleados, y aunque todos comparten características básicas, la forma en la que se calcula su sueldo final varía según su rol.
+
+Requerimientos del Sistema:
+
+Modelo de Datos Base: Se debe modelar a los empleados de la empresa. Todo empleado debe registrar su nombre y su sueldo base mensual.
+
+Roles Específicos:
+
+Programador: Además de su sueldo base, recibe un bono fijo en pesos por los proyectos completados en el mes.
+
+Gerente: Su bono no es fijo, sino que recibe un porcentaje adicional sobre su sueldo base según el rendimiento del departamento.
+
+Comportamiento Esperado:
+Todo empleado del sistema, sin importar su cargo, debe poder responder al mensaje calcularSueldo(), el cual debe devolver el monto total a cobrar ese mes (aplicando las reglas correspondientes a su rol).
+
+Prueba de Ejecución (Main):
+Escribir un programa principal que cumpla con los siguientes pasos:
+
+Crear una única estructura de datos (lista o arreglo genérico) capaz de almacenar a cualquier empleado de la empresa.
+
+Cargar en dicha estructura al menos un Empleado raso, un Programador y un Gerente.
+
+Iterar sobre la colección completa y, por cada registro, imprimir en consola el nombre del empleado y su sueldo final a cobrar.
+
+Restricción de Diseño: En el bucle de la prueba de ejecución, está estrictamente prohibido utilizar estructuras de control condicionales (como if, switch o instanceof) para determinar el tipo de empleado y calcular su sueldo. El diseño debe basarse puramente en polimorfismo.

@@ -1,0 +1,45 @@
+Ejercicio Práctico: Sistema Bancario
+
+
+Contexto:
+Un banco local necesita un sistema para gestionar las cuentas de sus clientes. Todas las cuentas comparten características básicas, pero existen reglas especiales dependiendo del tipo de cuenta, especialmente a la hora de retirar dinero o generar ganancias.
+
+Requerimientos del Sistema:
+
+La Superclase (CuentaBancaria):
+
+Debe tener como atributos el titular (String) y el saldo (Double).
+
+Un constructor que inicialice ambos valores.
+
+Un método depositar(Double monto) que sume el monto al saldo.
+
+Un método retirar(Double monto). Por defecto, una cuenta normal solo permite retirar dinero si el saldo es mayor o igual al monto solicitado. Si no hay suficiente dinero, debe imprimir "Fondos insuficientes".
+
+Un método mostrarInfo() que imprima el titular y el saldo actual.
+
+Subclase 1 (CuentaAhorro):
+
+Regla de negocio: Las cuentas de ahorro son cuentas normales, pero tienen una ventaja: generan intereses.
+
+Atributo propio: tasaInteres (Double, ej: 5.0 para representar un 5%).
+
+Debe tener un método exclusivo llamado aplicarInteres(), que calcule el interés sobre el saldo actual y lo sume al saldo. (Ojo: piensa bien cómo vas a modificar el saldo del padre desde el hijo si el atributo saldo es private).
+
+Pista de diseño: ¿Necesitas sobrescribir el método retirar aquí? Piénsalo según lo que charlamos antes.
+
+Subclase 2 (CuentaCorriente):
+
+Regla de negocio: Las cuentas corrientes están pensadas para negocios. El banco les da un "límite al descubierto" (un margen de deuda permitido).
+
+Atributo propio: limiteDescubierto (Double, ej: 500.0).
+
+Sobrescitura obligatoria: Debes modificar el método retirar(Double monto). Esta cuenta SÍ permite retirar dinero aunque el saldo llegue a números negativos, siempre y cuando el total retirado no supere el saldo que tiene más su limiteDescubierto. Si supera ese límite, imprime "Límite al descubierto excedido".
+
+El Main (Prueba de Ejecución):
+
+Crea una CuentaAhorro con $1000 de saldo y 10% de interés. Aplícale el interés y luego intenta retirarle $1500 (debería rebotar).
+
+Crea una CuentaCorriente con $1000 de saldo y un límite al descubierto de $500. Intenta retirarle $1200 (debería dejarte y el saldo quedar en -$200).
+
+Llama a mostrarInfo() en ambas.

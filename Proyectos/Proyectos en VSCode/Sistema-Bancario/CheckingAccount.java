@@ -20,7 +20,7 @@ public class CheckingAccount extends Account
             return getBalance();
         }
         setBalance(aux);
-        return aux;
+        return getBalance();
 
     }
     

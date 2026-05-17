@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Modela el Carcaj que lleva el personaje para
  * tranportar sus flechas.
@@ -19,14 +16,6 @@ public class Carcaj extends Elemento
     public Carcaj() 
     {
         this("Carcaj chico", 5);
-        /*
-        super();
-        setPeso(PESO_PROPIO);
-        setNombre("Carcaj chico");
-        setTipo(TipoElemento.RECIPIENTE);
-        flechas = new ArrayList<>();
-        capacidad = 5;
-        */
     }
 
     /**
@@ -42,7 +31,6 @@ public class Carcaj extends Elemento
         super(nombre, 0, TipoElemento.RECIPIENTE);
         setPeso(PESO_PROPIO);
         this.capacidad = capacidad;
-        
         flechas = new ArrayList<>();
     }
 
@@ -64,7 +52,7 @@ public class Carcaj extends Elemento
     public void addFlecha (Elemento flecha) 
     {
         if(flecha == null || getCapacidad() == null) return;
-
+        
         if(!(flecha instanceof Flecha))
         {
             System.out.println(flecha.getNombre() + ": No es una flecha");

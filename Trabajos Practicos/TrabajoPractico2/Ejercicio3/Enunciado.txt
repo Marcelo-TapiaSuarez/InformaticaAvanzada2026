@@ -1,4 +1,6 @@
-import java.util.TreeMap;
+Implemente los métodos de la clase Habitacion según la documentación de la clase.
+
+Codigo:
 
 /**
  * Clase Habitacion - Una habitacion en un juego de aventuras
@@ -34,7 +36,7 @@ public class Habitacion
      * Inicialmente, la habitacion no tiene salidas, "descripcion"
      * es algo asi como "una cocina" o "un patio".
      * 
-     * Se incorpora el String nombre y el TreeMap de elementos para
+     * Se incorpora el String nombre y el Map de elementos para
      * adaptarlo al TP de Informatica Avanzada.
      * 
      * @param nombre El nombre de la habitacion
@@ -42,11 +44,9 @@ public class Habitacion
      */
     public Habitacion (LugaresMapa lugar) 
     {
+        //this.descripcion = descripcion;
         salidas = new TreeMap<>();
-        elementos = new TreeMap<>();
-
-        this.lugar = lugar;
-        
+        // TODO - Modificar metodo
     }
 
     /**
@@ -54,9 +54,9 @@ public class Habitacion
      * 
      * @return El nombre de la habitacion.
      */
-    public String getNombre () 
-    {
-        return lugar.getNombre();
+    public String getNombre () {
+        // TODO - Implementar metodo
+        return null;
     }
 
     /**
@@ -65,7 +65,8 @@ public class Habitacion
      */
     public String getDescripcionCorta()
     {
-        return lugar.getDescripcion();
+        // TODO - Implementar metodo
+        return null;
     }
 
     /**
@@ -82,11 +83,10 @@ public class Habitacion
      */
     public String getDescripcionLarga()
     {
+        // TODO - Modificar metodo
         //return "Usted esta en  " + descripcion + ".\n" + getStringDeSalidas();
-
-        return "Usted esta en  " + getDescripcionCorta() + "." +
-               "\n"             + getStringDeSalidas() +
-               "\n"             + getStringDeElementos();
+        return null;
+        
     }
 
     /**
@@ -99,17 +99,8 @@ public class Habitacion
      * 
      * @param elemento El elemento a agregar.
      */
-    public void addElemento (Elemento elemento) 
-    {
-        if(elemento == null || elemento.getNombre() == null) return;
-
-        if(TipoElemento.LIQUIDO.equals(elemento.getTipo()))
-        {
-            System.out.println(elemento.getNombre() + ": se acaba de derramar en el piso");
-            return;
-        }
-
-        elementos.put(elemento.getNombre(),elemento);
+    public void addElemento (Elemento elemento) {
+        // TODO - Implementar metodo
     }
 
     /**
@@ -127,22 +118,9 @@ public class Habitacion
      * @param nombre El nombre del elemento a tomar.
      * @return El elemento a tomar.
      */
-    public Elemento getElemento (String nombre) 
-    {
-        if(nombre == null || !elementos.containsKey(nombre))
-        {
-            System.out.println(nombre + ": No existe");
-            return null;
-        }
-        
-        if(TipoElemento.FIJO.equals(elementos.get(nombre).getTipo()))
-        {
-            System.out.println(nombre + ": No se puede tomar");
-            return null;
-            
-        }
-
-        return elementos.remove(nombre);
+    public Elemento getElemento (String nombre) {
+        // TODO - Implementar metodo
+        return null;
     }
 
     /**
@@ -156,18 +134,8 @@ public class Habitacion
      */
     protected String getStringDeElementos ()
     {
-        if(elementos.isEmpty())
-        {
-            return "No hay elementos en este lugar";
-        }
-        
-        String cadenaElementos = "Elementos:";
-        for(String n : elementos.keySet())
-        {
-            cadenaElementos += " " + n;
-        }
-
-        return cadenaElementos;
+        // TODO - Implementar metodo
+        return null;
     }
 
     /**
@@ -183,11 +151,7 @@ public class Habitacion
      */
     public Habitacion getSalida (Salida direccion) 
     {
-        if(direccion == null || !salidas.containsKey(direccion))
-        {
-            System.out.println("No hay salida en direccion " + direccion);
-            return this;
-        }
+        // TODO - Modificar metodo
         return salidas.get(direccion);
     }
 
@@ -220,3 +184,35 @@ public class Habitacion
 
 }
 
+
+Prueba:
+
+try {
+    Mapa mapa = Mapa.getInstance();
+    Habitacion hab = mapa.getInicio();
+    System.out.println(hab.getNombre());
+    System.out.println(hab.getDescripcionCorta());
+    hab = hab.getSalida(Salida.NORTE);
+    System.out.println(hab.getNombre());
+    System.out.println(hab.getDescripcionCorta());
+    hab = hab.getSalida(Salida.OESTE);
+    System.out.println(hab.getNombre());
+    System.out.println(hab.getDescripcionCorta());
+    currentTestResult = TestResult.PASS;
+}
+catch (Exception e){
+    System.out.println(e.getMessage());
+}
+
+
+Resultado:
+
+Casa
+Estas en tu casa. Nada como el hogar para descansar.
+La necesidad de aventura te impulsa a salir.
+Camino
+El camino que te lleva al pueblo.
+Cruce
+Este cruce te permite ir a tu casa, al pueblo
+o a la ladera del cerro.
+PASS

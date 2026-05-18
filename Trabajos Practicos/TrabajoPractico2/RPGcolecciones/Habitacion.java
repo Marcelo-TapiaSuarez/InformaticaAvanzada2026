@@ -84,9 +84,9 @@ public class Habitacion
     {
         //return "Usted esta en  " + descripcion + ".\n" + getStringDeSalidas();
 
-        return "Usted esta en  " + getDescripcionCorta() + "." +
-               "\n"             + getStringDeSalidas() +
-               "\n"             + getStringDeElementos();
+        return getDescripcionCorta() + "\n" + 
+               getStringDeSalidas() + "\n" +
+               getStringDeElementos();
     }
 
     /**
@@ -183,11 +183,12 @@ public class Habitacion
      */
     public Habitacion getSalida (Salida direccion) 
     {
-        if(direccion == null || !salidas.containsKey(direccion))
+        if(direccion == null || !salidas.containsKey(direccion) || salidas.get(direccion) == null)
         {
             System.out.println("No hay salida en direccion " + direccion);
             return this;
         }
+
         return salidas.get(direccion);
     }
 
@@ -217,6 +218,4 @@ public class Habitacion
         }
         return cadena;
     }
-
 }
-

@@ -18,15 +18,12 @@ public class Carcaj extends Elemento
      */
     public Carcaj() 
     {
-        this("Carcaj chico", 5);
-        /*
         super();
         setPeso(PESO_PROPIO);
         setNombre("Carcaj chico");
         setTipo(TipoElemento.RECIPIENTE);
         flechas = new ArrayList<>();
         capacidad = 5;
-        */
     }
 
     /**
@@ -39,8 +36,10 @@ public class Carcaj extends Elemento
      */
     public Carcaj(String nombre, Integer capacidad) 
     {
-        super(nombre, 0, TipoElemento.RECIPIENTE);
+        super();
         setPeso(PESO_PROPIO);
+        setNombre(nombre);
+        setTipo(TipoElemento.RECIPIENTE);
         this.capacidad = capacidad;
         
         flechas = new ArrayList<>();
@@ -63,7 +62,7 @@ public class Carcaj extends Elemento
      */
     public void addFlecha (Elemento flecha) 
     {
-        if(flecha == null || getCapacidad() == null) return;
+        if(flecha == null) return;
 
         if(!(flecha instanceof Flecha))
         {
@@ -71,7 +70,7 @@ public class Carcaj extends Elemento
             return;
         }
         
-        if(getCapacidad() <= getCantidadFlechas())
+        if(getCantidadFlechas() >= getCapacidad())
         {
             System.out.println(getNombre() + ": Capacidad completa");
             return;
@@ -94,13 +93,13 @@ public class Carcaj extends Elemento
      */
     public Flecha getFlecha () 
     {
-        if(getCantidadFlechas() == 0)
+        if(flechas.isEmpty())
         {
             System.out.println(getNombre() + ": No quedan flechas");
             return null;
         }
 
-        Flecha flecha = flechas.remove(0);
+        Flecha flecha = flechas.remove(flechas.size() - 1);
         if(flecha == null || flecha.getPeso() == null) return flecha;
         
         addPeso(-(flecha.getPeso()));
@@ -115,16 +114,9 @@ public class Carcaj extends Elemento
      */
     public void addPeso (Integer peso) 
     {
-        if(peso == null || getPeso() == null) return;
+        if(peso == null) return;
 
-        Integer nuevoPeso = getPeso()+peso;
-        if(nuevoPeso < PESO_PROPIO)
-        {
-            setPeso(PESO_PROPIO);
-            return;
-        }
-
-        setPeso(nuevoPeso);
+        setPeso(getPeso()+peso);
     }
 
     /**
@@ -137,7 +129,7 @@ public class Carcaj extends Elemento
     @Override        
     public String toString() 
     {
-        return getNombre() + ": Flechas " + getCantidadFlechas() + "/" + ((getCapacidad() == null)? 0:getCapacidad());
+        return getNombre() + ": Flechas " + getCantidadFlechas() + "/" + getCapacidad();
     }
 
     public Integer getCantidadFlechas () {
@@ -147,5 +139,5 @@ public class Carcaj extends Elemento
     public Integer getCapacidad () {
         return capacidad;
     }
-    
 }
+    

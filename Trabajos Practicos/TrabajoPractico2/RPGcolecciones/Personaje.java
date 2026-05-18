@@ -1,7 +1,8 @@
 /**
  * Esta clase modela un personaje de un juego de rol.
  */
-public class Personaje {
+public class Personaje 
+{
     private final Integer MAX_VIDA;
     private final Integer PESO_MAXIMO_BOLSA;
     // nombre -> el nombre del personaje
@@ -27,18 +28,24 @@ public class Personaje {
      * @param vida El valor inicial y maximo de vida del personaje.
      * @param peso El peso maximo que puede transportar el personaje.
      */
-    public Personaje (String nombre, Integer vida, Integer peso) {
-        // TODO - Implementar metodo
-        MAX_VIDA = -1;
-        PESO_MAXIMO_BOLSA = -1;
+    public Personaje (String nombre, Integer vida, Integer peso) 
+    {
+        MAX_VIDA = vida;
+        this.vida = vida;
+        PESO_MAXIMO_BOLSA = peso;
+        this.nombre = nombre;
+        bolsa = null;
+        objeto = null;
+        habitacion = Mapa.getInstance().getInicio();
     }
 
     /**
      * Imprime en pantalla la informacion sobre el lugar
      * donde se encuentra.
      */
-    public void mirarAlrededor () {
-        // TODO - Implementar metodo
+    public void mirarAlrededor () 
+    {
+        System.out.println(habitacion.getDescripcionLarga());
     }
 
     /**
@@ -48,8 +55,9 @@ public class Personaje {
      * 
      * @param direccion Direccion por donde salir de la habitacion
      */
-    public void irHacia (Salida direccion) {
-        // TODO - Implementar metodo
+    public void irHacia (Salida direccion) 
+    {
+        habitacion = habitacion.getSalida(direccion);
     } 
 
     /**
@@ -61,8 +69,27 @@ public class Personaje {
      * 
      * Si no hay bolsa (null), mostrar "No hay bolsa"
      */
-    public void guardarElemento() {
-        // TODO - Implementar metodo
+    public void guardarElemento() 
+    {
+        if(bolsa == null)
+        {
+            System.out.println("No hay bolsa");
+            return;
+        }
+
+        if(objeto == null)
+        {
+            System.out.println("No hay elemento para agregar a la bolsa");
+            return;
+        }
+        Integer aux = bolsa.getPesoActual();
+        bolsa.addElemento(objeto);
+        if(bolsa.getPesoActual() > aux)
+        {
+            objeto = null;
+            return;
+        }
+        
     }
 
     /**
@@ -79,8 +106,29 @@ public class Personaje {
      * 
      * @param nombre El elemento a tomar de la bolsa.
      */
-    public void tomarElemento (String nombre) {
-        // TODO - Implementar metodo
+    public void tomarElemento (String nombre) 
+    {
+        if(objeto != null)
+        {
+            System.out.println("Manos ocupadas");
+            return;
+        }
+
+        if(bolsa == null)
+        {
+            System.out.println("No hay bolsa");
+            return;
+        }
+
+        Elemento elemento = bolsa.getElemento(nombre);
+        if(elemento == null)
+        {
+            System.out.println("No se cuenta con el " + nombre);
+            return;
+        }
+
+        objeto = elemento;
+
     }
     
     /**
@@ -93,8 +141,27 @@ public class Personaje {
      * 
      * @param nombre Nombre del objeto a recoger de la habitacion.
      */
-    public void recogerElemento (String nombre) {
-        // TODO - Implementar metodo
+    public void recogerElemento (String nombre) 
+    {
+        if(nombre == null) return;
+
+        Elemento elementoHabit = habitacion.getElemento(nombre);
+
+        if(elementoHabit == null)
+        {
+            return;
+        }
+
+        Integer aux = bolsa.getPesoActual();
+
+        if(objeto != null)
+        {
+            bolsa.addElemento(objeto);
+        }
+        
+        objeto = elementoHabit;
+        return;
+
     }
 
     /**
@@ -104,8 +171,16 @@ public class Personaje {
      * Si las manos estan vacias imprime el mensaje:
      *      "No hay objeto para dejar"
      */
-    public void dejarElemento () {
-        // TODO - Implementar metodo
+    public void dejarElemento () 
+    {
+        if(objeto == null)
+        {
+            System.out.println("No hay objeto para dejar");
+            return;
+        }
+
+        habitacion.addElemento(objeto);
+        objeto = null;
     }
 
 

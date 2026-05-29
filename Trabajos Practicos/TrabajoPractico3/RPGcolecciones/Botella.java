@@ -14,6 +14,7 @@ public class Botella extends Recipiente implements Portable
         super();
         this.estado = new Vacia();
         setPeso(PESO_PROPIO);
+        generarNombre();
     }
 
 /*
@@ -93,17 +94,18 @@ public class Botella extends Recipiente implements Portable
         {
             if(getEstado() == null || elemento == null || !(elemento instanceof Liquido))
             {
-                throw new AccionNoPermitidaException(getNombre());
+                throw new AccionNoPermitidaException("Botella no entrega elementos");
             }
 
             if(getContenido() != null)
             {
-                throw new ContenedorLlenoException(getNombre());
+                throw new ContenedorLlenoException("Botella llena");
             }
 
             setContenido(elemento);
             estado = new Llena();
             setPeso(PESO_PROPIO+elemento.getPeso());
+            generarNombre();
         }
 
         @Override
@@ -111,10 +113,10 @@ public class Botella extends Recipiente implements Portable
         {
             if(getEstado() == null)
             {
-                throw new AccionNoPermitidaException(getNombre());
+                throw new AccionNoPermitidaException("Botella no entrega elementos");
             }
 
-            throw new ContenedorVacioException(getNombre());
+            throw new ContenedorVacioException("Botella vacia");
         }
 
         @Override
@@ -139,10 +141,10 @@ public class Botella extends Recipiente implements Portable
         {
             if(getEstado() == null)
             {
-                throw new AccionNoPermitidaException(getNombre());
+                throw new AccionNoPermitidaException("Botella no entrega elementos");
             } 
             
-            throw new ContenedorLlenoException(getNombre());
+            throw new ContenedorLlenoException("Botella llena");
         }    
 
         @Override
@@ -150,18 +152,19 @@ public class Botella extends Recipiente implements Portable
         {
             if(getEstado() == null)
             {
-                throw new AccionNoPermitidaException(getNombre());
+                throw new AccionNoPermitidaException("Botella no entrega elementos");
             }
 
             if(getEstado() instanceof Vacia)
             {
-                throw new ContenedorVacioException(getNombre());
+                throw new ContenedorVacioException("Botella vacia");
             }
             
             Elemento e = getContenido();
             setContenido(null);
             estado = new Vacia();
             setPeso(PESO_PROPIO);
+            generarNombre();
 
             return e;
         }
@@ -183,18 +186,7 @@ public class Botella extends Recipiente implements Portable
      */
     public void generarNombre () 
     {
-        try
-        {
-            System.out.println(getNombre() + );
-        }
-        catch(AccionNoPermitidaException e)
-        {
-            System.out.println(e.getMessage());
-        }
-        catch(ContenedorVacioException e)
-        {
-            System.out.println("Botella vacia");
-        }
+        setNombre("Botella " + getEstado().toString());
     }
 
     public Elemento getContenido() {

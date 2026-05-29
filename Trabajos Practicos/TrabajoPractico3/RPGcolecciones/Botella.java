@@ -1,4 +1,5 @@
-public class Botella extends Recipiente implements Portable {
+public class Botella extends Recipiente implements Portable 
+{
     private static final Integer PESO_PROPIO = 4;
     private Elemento contenido;
     private EstadoContenedor estado;
@@ -8,8 +9,11 @@ public class Botella extends Recipiente implements Portable {
      * 
      * Debe inicializarse con el peso propio y en estado vacia.
      */
-    public Botella() {
-        // TODO - Implementar constructor
+    public Botella() 
+    {
+        super();
+        this.estado = new Vacia();
+        setPeso(PESO_PROPIO);
     }
 
 /*
@@ -82,16 +86,35 @@ public class Botella extends Recipiente implements Portable {
      * 
      * Ver lo implementado en Arroyo y Barrica.
      */
-    private class Vacia extends EstadoContenedor {     
+    private class Vacia extends EstadoContenedor 
+    {     
         @Override
-        public void addElemento(Elemento elemento) throws ContenedorLlenoException, AccionNoPermitidaException {
-            // TODO - Implementar metodo
+        public void addElemento(Elemento elemento) throws ContenedorLlenoException, AccionNoPermitidaException 
+        {
+            if(getEstado() == null || elemento == null || !(elemento instanceof Liquido))
+            {
+                throw new AccionNoPermitidaException(getNombre());
+            }
+
+            if(getContenido() != null)
+            {
+                throw new ContenedorLlenoException(getNombre());
+            }
+
+            setContenido(elemento);
+            estado = new Llena();
+            setPeso(PESO_PROPIO+elemento.getPeso());
         }
 
         @Override
-        public Elemento getElemento() throws ContenedorVacioException, AccionNoPermitidaException {
-            // TODO - Implementar metodo
-            return null;
+        public Elemento getElemento() throws ContenedorVacioException, AccionNoPermitidaException 
+        {
+            if(getEstado() == null)
+            {
+                throw new AccionNoPermitidaException(getNombre());
+            }
+
+            throw new ContenedorVacioException(getNombre());
         }
 
         @Override
@@ -109,16 +132,38 @@ public class Botella extends Recipiente implements Portable {
      * 
      * Ver lo implementado en Arroyo y Barrica.
      */
-    private class Llena extends EstadoContenedor {
+    private class Llena extends EstadoContenedor 
+    {
         @Override
-        public void addElemento(Elemento elemento) throws ContenedorLlenoException, AccionNoPermitidaException {
-            // TODO - Implementar metodo
+        public void addElemento(Elemento elemento) throws ContenedorLlenoException, AccionNoPermitidaException 
+        {
+            if(getEstado() == null)
+            {
+                throw new AccionNoPermitidaException(getNombre());
+            } 
+            
+            throw new ContenedorLlenoException(getNombre());
         }    
 
         @Override
-        public Elemento getElemento() throws ContenedorVacioException, AccionNoPermitidaException {
-            // TODO - Implementar metodo
-            return null;
+        public Elemento getElemento() throws ContenedorVacioException, AccionNoPermitidaException 
+        {
+            if(getEstado() == null)
+            {
+                throw new AccionNoPermitidaException(getNombre());
+            }
+
+            if(getEstado() instanceof Vacia)
+            {
+                throw new ContenedorVacioException(getNombre());
+            }
+            
+            Elemento e = getContenido();
+            setContenido(null);
+            estado = new Vacia();
+            setPeso(PESO_PROPIO);
+
+            return e;
         }
 
         @Override
@@ -136,8 +181,20 @@ public class Botella extends Recipiente implements Portable {
      * En caso de que no tenga contenido, utiliza el texto
      * "Botella vacia"
      */
-    public void generarNombre () {
-        // TODO - Implementar metodo
+    public void generarNombre () 
+    {
+        try
+        {
+            System.out.println(getNombre() + );
+        }
+        catch(AccionNoPermitidaException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        catch(ContenedorVacioException e)
+        {
+            System.out.println("Botella vacia");
+        }
     }
 
     public Elemento getContenido() {

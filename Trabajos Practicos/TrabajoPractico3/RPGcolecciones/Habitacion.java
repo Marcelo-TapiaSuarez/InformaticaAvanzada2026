@@ -49,7 +49,9 @@ public class Habitacion implements Contenedor
     {
         // this.descripcion = descripcion;
         salidas = new TreeMap<>();
-        // TODO - Modificar metodo
+        elementos = new TreeMap<>();
+        this.lugar = lugar;
+        estado = new Vacia();
     }
 
     /**
@@ -69,10 +71,10 @@ public class Habitacion implements Contenedor
      */
     public String getDescripcionLarga()
     {
-        // TODO - Modificar metodo
-        // return "Usted esta en  " + descripcion + ".\n" + getStringDeSalidas()
-        ;
-        return null;
+        return getDescripcionCorta() + "\n" + 
+               ((derramado != null) ? "Se ha derramado " + derramado.getNombre() + " en el piso\n" : "") +
+               getStringDeSalidas() + "\n" +
+               getStringDeElementos();
     }
 
     /**
@@ -105,7 +107,11 @@ public class Habitacion implements Contenedor
      */
     public Habitacion getSalida (Salida direccion) throws AccionNoPermitidaException
     {
-        // TODO - Modificar metodo
+        if(direccion == null || !salidas.containsKey(direccion) || salidas.get(direccion) == null)
+        {
+            throw new AccionNoPermitidaException("No hay salida en direccion " + direccion);
+        }
+
         return salidas.get(direccion);
     }
 
@@ -177,7 +183,32 @@ public class Habitacion implements Contenedor
      * no liquido.
      */
      // TODO - Implementar la clase privada
-    private class Vacia extends EstadoContenedor {
+    private class Vacia extends EstadoContenedor 
+    {
+        @Override
+        public void addElemento(Elemento elemento)
+        {
+            if(elemento instanceof Liquido)
+            {
+                derramado = (Liquido) elemento;
+                return;
+            }
+
+            elementos.put(elemento.getNombre(), elemento);
+            estado = new ConElementos();
+        }
+
+        @Override
+        public Elemento getElemento(String nombre) throws ContenedorVacioException
+        {
+            throw new ContenedorVacioException("No hay elementos en la habitacion");
+        }
+
+        @Override
+        public String toString()
+        {
+            return "No hay elementos en la habitacion";
+        }
     }
 
     /**
@@ -186,13 +217,65 @@ public class Habitacion implements Contenedor
      * Debe cambiar al estado VACIA al quitarse el ultimo elemento.
      */
      // TODO - Implementar la clase privada
-     private class ConElementos extends EstadoContenedor {
+    private class ConElementos extends EstadoContenedor 
+    {
+        @Override
+        public void addElemento(Elemento elemento)
+        {
+            if(elemento instanceof Liquido)
+            {
+                derramado = (Liquido) elemento;
+                return;
+            }
+
+            elementos.put(elemento.getNombre(), elemento);
+        }
+
+        @Override
+        public Elemento getElemento(String nombre) throws AccionNoPermitidaException
+        {
+            if(nombre == null || !elementos.containsKey(nombre))
+            {
+                throw new AccionNoPermitidaException("No existe el elemento " + nombre);
+            }
+
+            Elemento noPortable = elementos.get(nombre);
+            
+            if(noPortable instanceof NoPortable)
+            {
+                return noPortable;
+            }
+            
+            Elemento portable = elementos.remove(nombre);
+
+            if(elementos.size() < 1)
+            {
+                estado = new Vacia();
+            }
+
+            return portable;
+        }
+
+        @Override
+        public String toString()
+        {
+            String elementosHab = "";
+            for(String n : elementos.keySet())
+            {
+                elementosHab += n + " ";
+            }
+            return "Elementos: " + elementosHab;
+        }
     }
 
 /*
 ************* FIN Patron State ************* 
 */
 
+    public Liquido getDerramado()
+    {
+        return derramado;
+    }
     /**
      * Devuelve el nombre de la habitacion.
      * 

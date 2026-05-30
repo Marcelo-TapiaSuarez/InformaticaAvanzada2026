@@ -1,10 +1,12 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Modela el Carcaj que lleva el personaje para
  * tranportar sus flechas.
  */
-public class Carcaj extends Recipiente implements Portable {
+public class Carcaj extends Recipiente implements Portable 
+{
     private final Integer PESO_PROPIO = 10;
     private Integer capacidad;
     private List<Flecha> flechas;
@@ -16,8 +18,13 @@ public class Carcaj extends Recipiente implements Portable {
      * Arroyo y Barrica a modo de ejemplo de los estados).
      * Recordar que tiene peso inicial.
      */
-    public Carcaj () {
-        // TODO - Implementar constructor
+    public Carcaj () 
+    {
+        flechas = new ArrayList<>();
+        capacidad = 5;
+        estado = new Vacio();
+        setNombre("Carcaj chico");
+        setPeso(PESO_PROPIO);
     }
     
     /**
@@ -29,8 +36,13 @@ public class Carcaj extends Recipiente implements Portable {
      * @param nombre El nombre del carcaj.
      * @param capacidad Cantidad maxima de flechas.
      */
-    public Carcaj (String nombre, Integer capacidad) {
-        // TODO - Implementar constructor
+    public Carcaj (String nombre, Integer capacidad) 
+    {
+        setNombre(nombre);
+        this.capacidad = 5;
+        flechas = new ArrayList<>();
+        estado = new Vacio();
+        setPeso(PESO_PROPIO);
     }
     
 /*
@@ -112,8 +124,32 @@ public class Carcaj extends Recipiente implements Portable {
      * Debe cambiar al estado CONFLECHAS al agregarse una flecha.
      */
     // TODO - Implementar la clase privada
-    private class Vacio extends EstadoContenedor {
+    private class Vacio extends EstadoContenedor 
+    {
+        @Override
+        public void addElemento(Elemento elemento) throws AccionNoPermitidaException
+        {
+            if(getEstado() == null || elemento == null || !(elemento instanceof Flecha))
+            {
+                throw new AccionNoPermitidaException("Carcaj no acepta elementos");
+            }
 
+            flechas.add((Flecha) elemento);
+            addPeso(elemento.getPeso());
+            estado = new ConFlechas();
+
+        }
+
+        @Override
+        public Elemento getElemento() throws ContenedorVacioException, AccionNoPermitidaException
+        {   
+            if(getEstado() == null)
+            {
+                throw new AccionNoPermitidaException("Carcaj no devuelve elementos");
+            }
+            throw new ContenedorVacioException("Carcaj vacio");
+        }
+        
         @Override
         public String toString() {
             return " sin flechas (vacio)";
@@ -127,7 +163,48 @@ public class Carcaj extends Recipiente implements Portable {
      * la capacidad maxima.
      */
     // TODO - Implementar la clase privada
-    private class ConFlechas extends EstadoContenedor {
+    private class ConFlechas extends EstadoContenedor 
+    {
+        @Override
+        public void addElemento(Elemento elemento) throws ContenedorLlenoException, AccionNoPermitidaException
+        {
+            if(getEstado() == null || elemento == null || !(elemento instanceof Flecha))
+            {
+                throw new AccionNoPermitidaException("Carcaj no acepta elementos");
+            }
+
+            if(getCantidadFlechas() < getCapacidad())
+            {
+                flechas.add((Flecha) elemento);
+                addPeso(elemento.getPeso());
+                return;
+            }
+
+            estado = new Lleno();
+            throw new ContenedorLlenoException("Carcaj lleno");
+            
+
+        }
+
+        @Override
+        public Elemento getElemento() throws ContenedorVacioException, AccionNoPermitidaException
+        {
+            if(getEstado() == null)
+            {
+                throw new AccionNoPermitidaException("Carcaj no entrega elementos por nombre");
+            }
+
+            if(getCantidadFlechas() > 0)
+            {
+                Elemento aux = flechas.remove(getCantidadFlechas()-1);
+                addPeso(-aux.getPeso());
+                return aux;
+            }
+
+            estado = new Vacio();
+            throw new ContenedorVacioException("Carcaj vacio");
+
+        }
 
         @Override
         public String toString() {
@@ -140,7 +217,26 @@ public class Carcaj extends Recipiente implements Portable {
      * Debe cambiar al estado CONFLECHAS al quitarse una flecha.
      */
     // TODO - Implementar la clase privada
-    private class Lleno extends EstadoContenedor {
+    private class Lleno extends EstadoContenedor 
+    {
+        @Override
+        public Elemento getElemento() throws ContenedorVacioException, AccionNoPermitidaException
+        {
+            if(getEstado() == null)
+            {
+                throw new AccionNoPermitidaException("Carcaj no entrega elementos por nombre");
+            }
+
+            if(getEstado() instanceof Vacio)
+            {
+                throw new ContenedorVacioException("Carcaj vacio");
+            }
+            
+            Elemento aux = flechas.remove(getCantidadFlechas()-1);
+            setPeso(-aux.getPeso());
+            return aux;
+
+        }
 
         @Override
         public String toString() {
@@ -168,9 +264,9 @@ public class Carcaj extends Recipiente implements Portable {
      * <estado> es el toString de cada estado.
      */
     @Override
-    public String toString() {
-        // TODO - Implementar metodo
-        return null;
+    public String toString() 
+    {
+        return getNombre() + getEstado();
     }
 
     public Integer getCantidadFlechas () {

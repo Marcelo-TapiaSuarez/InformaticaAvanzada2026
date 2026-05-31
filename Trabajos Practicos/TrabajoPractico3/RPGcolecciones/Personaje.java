@@ -1,7 +1,8 @@
 /**
  * Esta clase modela un personaje de un juego de rol.
  */
-public class Personaje {
+public class Personaje 
+{
     private final Integer MAX_VIDA;
     private final Integer PESO_MAXIMO_BOLSA;
     // nombre -> el nombre del personaje
@@ -27,10 +28,15 @@ public class Personaje {
      * @param vida El valor inicial y maximo de vida del personaje.
      * @param peso El peso maximo que puede transportar el personaje.
      */
-    public Personaje (String nombre, Integer vida, Integer peso) {
-        // TODO - Implementar constructor
-        MAX_VIDA = -1;
-        PESO_MAXIMO_BOLSA = -1;
+    public Personaje (String nombre, Integer vida, Integer peso) 
+    {
+        MAX_VIDA = vida;
+        PESO_MAXIMO_BOLSA = peso;
+        setVida(vida);
+        setNombre(nombre);
+        bolsa = null;
+        objeto = null;
+        habitacion = Mapa.getInstance().getInicio();
     }
 
     /**
@@ -48,8 +54,16 @@ public class Personaje {
      * 
      * @param direccion Direccion por donde salir de la habitacion.
      */
-    public void irHacia (Salida direccion) {
-        // TODO - Implementar metodo
+    public void irHacia (Salida direccion) 
+    {
+        try
+        {
+            habitacion = habitacion.getSalida(direccion);
+        }
+        catch(AccionNoPermitidaException e)
+        {
+            System.out.println(e.getMessage());
+        }
     } 
 
     /**
@@ -65,8 +79,34 @@ public class Personaje {
      * En caso de no poder guardarse el elemento, mostrar el
      * mensaje que trae la excepcion.
      */
-    public void guardarElemento() {
-        // TODO - Implementar metodo
+    public void guardarElemento() 
+    {
+        try
+        {
+            if(getBolsa() == null)
+            {
+                System.out.println(getNombre() + ": No tiene bolsa");
+                return;
+            }
+
+            if(objeto == null)
+            {
+                System.out.println("No hay elemento para agregar a la bolsa");
+                return;
+            }
+            
+            getBolsa().addElemento(objeto);
+            objeto = null;
+        }
+        catch(AccionNoPermitidaException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        catch(ContenedorLlenoException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
     }
 
     /**
@@ -87,8 +127,32 @@ public class Personaje {
      * 
      * @param nombre El elemento a tomar de la bolsa.
      */
-    public void tomarElemento (String nombre) {
-        // TODO - Implementar metodo
+    public void tomarElemento (String nombre) 
+    {
+        try
+        {
+            if(getBolsa() == null)
+            {
+                System.out.println(getNombre() + ": No tiene bolsa");
+                return;
+            }
+
+            if(objeto != null)
+            {
+                System.out.println("Manos ocupadas");
+                return;
+            }
+
+            objeto = getBolsa().getElemento(nombre);
+        }
+        catch(AccionNoPermitidaException e)
+        {
+            System.out.println("No se cuenta con el " + nombre);
+        }
+        catch(ContenedorVacioException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
     
     /**
@@ -104,8 +168,38 @@ public class Personaje {
      * 
      * @param nombre Nombre del objeto a recoger de la habitacion.
      */
-    public void recogerElemento (String nombre) {
-        // TODO - Implementar metodo
+    public void recogerElemento (String nombre) 
+    {
+        try
+        {
+            Elemento aux = habitacion.getElemento(nombre);
+
+            if(objeto != null)
+            {
+                guardarElemento();
+            }
+
+            if(objeto == null)
+            {
+                objeto = aux;
+            }
+            else
+            {
+                habitacion.addElemento(aux);
+            } 
+        }
+        catch(AccionNoPermitidaException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        catch(ContenedorVacioException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        catch(ContenedorLlenoException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -115,8 +209,29 @@ public class Personaje {
      * Si las manos estan vacias imprime el mensaje:
      *      "No hay objeto para dejar"
      */
-    public void dejarElemento () {
-        // TODO - Implementar metodo
+    public void dejarElemento () 
+    {
+        try
+        {
+            if(objeto == null)
+            {
+                System.out.println("No hay objeto para dejar");
+                return;
+            }
+            habitacion.addElemento(objeto);
+            objeto = null;
+        }
+        catch(AccionNoPermitidaException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        catch(ContenedorLlenoException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+
+        
     }
 
 
@@ -173,6 +288,11 @@ public class Personaje {
     
     public void setHabitacion(Habitacion habitacion) {
     	this.habitacion=habitacion;  	
+    }
+
+    public Habitacion getHabitacion()
+    {
+        return habitacion;
     }
 
 }

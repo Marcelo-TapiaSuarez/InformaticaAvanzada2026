@@ -43,7 +43,7 @@ Dado que ambas materias comparten un núcleo temático fuerte en programación o
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Lenguaje:** Java ☕
+- **Lenguaje:** Java 21 ☕
 - **Herramientas de Desarrollo:** BlueJ, VS Code.
 - **Control de Versiones:** Git & GitHub.
 

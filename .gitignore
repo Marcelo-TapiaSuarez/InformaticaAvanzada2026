@@ -17,3 +17,6 @@ build/
 
 # Ignora archivos zip
 *.zip
+
+# Ignora la carpeta
+EjemplosdeEA'S/

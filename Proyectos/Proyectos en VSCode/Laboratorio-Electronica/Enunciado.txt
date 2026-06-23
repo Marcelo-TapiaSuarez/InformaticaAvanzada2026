@@ -1,0 +1,10 @@
+⚙️ El Escenario: Laboratorio de Electrónica
+En el laboratorio hay distintos instrumentos. Todos comparten cosas básicas, pero algunos tienen capacidades extra más modernas.
+
+Aquí tienes las reglas del negocio:
+
+La base: Todo aparato en el laboratorio es un Instrumento. Todo instrumento tiene una marca (String) y sabe hacer algo común: encender() (que simplemente imprime "Aparato encendido").
+
+La diferencia: Cada aparato mide cosas distintas. Por lo tanto, el acto de realizarMedicion() es obligatorio para todos, pero cada instrumento debe programar cómo lo hace a su manera.
+
+La habilidad especial: Algunos aparatos modernos se pueden conectar por USB para descargar información. Existe una capacidad llamada Exportable, que obliga a quien la tenga a poseer el método exportarDatos().

@@ -18,5 +18,8 @@ build/
 # Ignora archivos zip
 *.zip
 
-# Ignora la carpeta
+# Ignora la carpeta Windows
 EjemplosdeEA'S/
+
+# Ignora la carpeta Fedora
+ExamenPromocion/
